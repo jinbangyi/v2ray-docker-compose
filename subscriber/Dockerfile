@@ -9,7 +9,7 @@ COPY . /app
 COPY requirements.txt /tmp
 
 # confirm
-RUN pip install --retries=3 --timeout=5 -r /tmp/requirements.txt
+RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --retries=3 --timeout=5 -r /tmp/requirements.txt
 
 ENV PYTHONPATH /app/src
 
