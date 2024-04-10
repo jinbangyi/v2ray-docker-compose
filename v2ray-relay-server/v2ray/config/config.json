@@ -7,32 +7,6 @@
   "inbounds": [
     {
       "listen": "0.0.0.0",
-      "port": 1010,
-      "protocol": "socks",
-      "settings": {
-        "auth": "noauth",
-        "udp": true
-      }
-    },
-    {
-      "listen": "0.0.0.0",
-      "port": 1110,
-      "protocol": "http",
-      "settings": {}
-    },
-    {
-      "listen": "0.0.0.0",
-      "port": 1210,
-      "protocol": "shadowsocks",
-      "settings": {
-        "password": "<SHADOWSOCKS-PASSWORD>",
-        "method": "aes-128-gcm",
-        "level": 0,
-        "network": "tcp,udp"
-      }
-    },
-    {
-      "listen": "0.0.0.0",
       "port": 1310,
       "protocol": "vmess",
       "settings": {

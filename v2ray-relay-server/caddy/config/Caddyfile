@@ -1,0 +1,14 @@
+{
+  http_port 80
+}
+
+http://<RELAY-IP> {
+  reverse_proxy https://baidu.com {
+    header_up Host {upstream_hostport}
+    header_up X-Forwarded-Host {host}
+  }
+
+  handle_path /subscribe {
+      reverse_proxy subscriber:29002
+  }
+}
