@@ -29,7 +29,7 @@ def get_vmess_links():
             vmess['port'] = vmess_config[0]['port']
             vmess['id'] = vmess_config[0]['settings']['clients'][0]['id']
 
-    return base64.b64encode(json.dumps(vmess).encode('utf8')).hex()
+    return base64.b64encode(json.dumps(vmess).encode('utf8')).decode()
 
 def get_v2ray_links() -> list:
     link = get_vmess_links()

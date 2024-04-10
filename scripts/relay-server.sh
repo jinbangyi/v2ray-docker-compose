@@ -5,6 +5,7 @@ git clone https://github.com/jinbangyi/v2ray-docker-compose.git
 cd v2ray-docker-compose
 
 cd subscriber
+cp -r ../v2ray-relay-server/v2ray .
 docker build . -t benny-subscriber
 cd ..
 
