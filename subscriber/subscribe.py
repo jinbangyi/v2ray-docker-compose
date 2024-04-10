@@ -2,6 +2,7 @@ import base64
 import os
 import subprocess
 import json
+import requests
 
 import uvicorn
 import aiohttp
@@ -11,7 +12,8 @@ from starlette.responses import HTMLResponse
 # from apscheduler.triggers.cron import CronTrigger
 
 def get_vmess_links():
-    ip = subprocess.getoutput('curl ifconfig.me')
+    resp = requests.get('http://ifconfig.me')
+    ip = resp.text
     # {"v":2,"ps":"233boy-tcp-116.62.45.83","add":"116.62.45.83","port":"10150","id":"86073f49-e92d-4af4-8abf-d20d58f9d41b","aid":"0","net":"tcp","type":"none","path":""}
     vmess = {
         "v": 2,
