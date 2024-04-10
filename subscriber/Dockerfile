@@ -5,7 +5,7 @@ USER root
 
 WORKDIR /app
 
-COPY src/ /app
+COPY . /app
 COPY requirements.txt /tmp
 
 # confirm
