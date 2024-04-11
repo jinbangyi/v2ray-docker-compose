@@ -68,8 +68,13 @@ DEFAULT_SUBSCRIBER_PORT=29002
 DEFAULT_SUBCONVERTER_PORT=25500
 app.apikeys = set([DEFAULT_APIKEY])
 
+@app.get('/internal')
+async def internal():
+    links = get_v2ray_links()
+    res = '\n'.join(links)
+    html = base64.b64encode(res.encode(encoding='utf8'))
+    return HTMLResponse(content=html, status_code=200)
 
-@app.get('/')
 @app.get('/subscribe')
 async def subscribe(apikey: str):
     if apikey not in app.apikeys:
@@ -85,7 +90,7 @@ async def subscribe_clash(apikey: str):
     if apikey not in app.apikeys:
         return HTMLResponse(content="0", status_code=400)
 
-    link = f'http://subscriber:{DEFAULT_SUBSCRIBER_PORT}/subscribe?apikey={DEFAULT_APIKEY}'
+    link = 'http://subscriber:{DEFAULT_SUBSCRIBER_PORT}/internal'
     async with aiohttp.ClientSession() as session:
         url = f'http://subconverter:{DEFAULT_SUBCONVERTER_PORT}/sub'
         params = {
