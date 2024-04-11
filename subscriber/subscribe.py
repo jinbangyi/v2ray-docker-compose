@@ -62,7 +62,10 @@ app = FastAPI(
     version='v0.0.1',
     description='for automation',
 )
-app.apikeys = set(['benny'])
+DEFAULT_APIKEY='benny'
+DEFAULT_SUBSCRIBER_PORT=29002
+DEFAULT_SUBCONVERTER_PORT=25500
+app.apikeys = set([DEFAULT_APIKEY])
 
 
 @app.get('/')
@@ -81,9 +84,9 @@ async def subscribe_clash(apikey: str):
     if apikey not in app.apikeys:
         return HTMLResponse(content="0", status_code=400)
 
-    link = 'http://subscriber:29002/subscribe'
+    link = f'http://subscriber:{DEFAULT_SUBSCRIBER_PORT}/subscribe?apikey={DEFAULT_APIKEY}'
     async with aiohttp.ClientSession() as session:
-        url = f'http://subconverter:25500/sub?target=clash&url={link}'
+        url = f'http://subconverter:{DEFAULT_SUBCONVERTER_PORT}/sub?target=clash&url={link}'
         async with session.get(url) as resp:
             text = await resp.text()
     return HTMLResponse(content=text, status_code=200)
@@ -95,6 +98,8 @@ async def add_apikey(apikey: str):
 
 @app.get('/apikey/remove/{apikey}')
 async def add_apikey(apikey: str):
+    if apikey == DEFAULT_APIKEY:
+        return f'{DEFAULT_APIKEY} can not be removed'
     app.apikeys.remove(apikey)
     return '1'
 
@@ -106,7 +111,7 @@ def start():
     uvicorn.run(
         "subscribe:app",
         host='0.0.0.0',
-        port=29002,
+        port=DEFAULT_SUBSCRIBER_PORT,
         log_level="info",
     )
     # scheduler.shutdown()
