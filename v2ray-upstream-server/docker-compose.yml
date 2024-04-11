@@ -6,8 +6,8 @@ services:
     restart: always
     environment:
       - v2ray.vmess.aead.forced=false
-    ports:
-      - "1310:1310"
+    # ports:
+    #   - "1310:1310"
     volumes:
       - ./v2ray/config/:/etc/v2ray/
       - ./logs:/var/log/v2ray/

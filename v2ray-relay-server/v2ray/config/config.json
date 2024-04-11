@@ -10,7 +10,7 @@
   "inbounds": [
     {
       "tag": "interconn",
-      "port": 16823,
+      "port": 1310,
       "protocol": "vmess",
       "settings": {
         "clients": [
