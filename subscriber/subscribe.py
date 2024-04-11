@@ -87,8 +87,12 @@ async def subscribe_clash(apikey: str):
 
     link = urllib.parse.quote_plus(f'http://subscriber:{DEFAULT_SUBSCRIBER_PORT}/subscribe?apikey={DEFAULT_APIKEY}')
     async with aiohttp.ClientSession() as session:
-        url = f'http://subconverter:{DEFAULT_SUBCONVERTER_PORT}/sub?target=clash&url={link}'
-        async with session.get(url) as resp:
+        url = f'http://subconverter:{DEFAULT_SUBCONVERTER_PORT}/sub'
+        params = {
+            'target': 'clash',
+            'url': link
+        }
+        async with session.get(url, params=params) as resp:
             text = await resp.text()
     return HTMLResponse(content=text, status_code=200)
 
