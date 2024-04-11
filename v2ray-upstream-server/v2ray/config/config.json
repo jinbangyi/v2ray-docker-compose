@@ -10,7 +10,7 @@
   "outbounds": [
     {
       "tag": "tunnel",
-      "protocol": "vmess",
+      "protocol": "vless",
       "settings": {
         "vnext": [
           {
@@ -19,11 +19,33 @@
             "users": [
               {
                 "id": "<RELAY-UUID>",
-                "alterId": 0
+                "alterId": 0,
+                "email": "t@t.tt",
+                "security": "auto",
+                "encryption": "none",
+                "flow": ""
               }
             ]
           }
         ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+          "serverName": "<RELAY-IP>"
+        },
+        "wsSettings": {
+          "path": "/science",
+          "headers": {
+            "Host": "<RELAY-IP>"
+          }
+        }
+      },
+      "mux": {
+        "enabled": false,
+        "concurrency": -1
       }
     },
     {

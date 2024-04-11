@@ -7,19 +7,18 @@ services:
     environment:
       - v2ray.vmess.aead.forced=false
     ports:
-      - "11310:11310"
       - "10150:10150"
     volumes:
       - ./v2ray/config/:/etc/v2ray/
       - ./logs:/var/log/v2ray/
 
-  # caddy: 
-  #   image: caddy
-  #   restart: always
-  #   ports:
-  #     - "443:443"
-  #   volumes:
-  #     - ./caddy/config/:/etc/caddy/
+  caddy: 
+    image: caddy
+    restart: always
+    ports:
+      - "11310:11310"
+    volumes:
+      - ./caddy/config/:/etc/caddy/
 
   subconverter:
     image: tindy2013/subconverter:0.9.0

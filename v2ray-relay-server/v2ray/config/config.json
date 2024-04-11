@@ -42,22 +42,24 @@
     {
       "tag": "interconn",
       "port": 11310,
-      "protocol": "vmess",
-      "streamSettings": {
-        "network": "tcp",
-        "tcpSettings": {
-          "header": {
-            "type": "none"
-          }
-        }
-      },
+      "protocol": "vless",
       "settings": {
         "clients": [
           {
             "id": "<RELAY-UUID>",
-            "alterId": 64
+            "alterId": 0,
+            "level": 1
           }
-        ]
+        ],
+        "decryption": "none"
+      },
+      "listen": "127.0.0.1",
+      "streamSettings": {
+        "network": "ws"
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
       }
     }
   ],
@@ -73,7 +75,41 @@
         "inboundTag": ["tunnel"],
         "domain": ["full:private.cloud.com"],
         "outboundTag": "portal"
+      },
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "blocked"
       }
     ]
-  }
+  },
+  "transport": {
+    "kcpSettings": {
+      "uplinkCapacity": 100,
+      "downlinkCapacity": 100,
+      "congestion": true
+    }
+  },
+  "dns": {
+    "servers": [
+      "https+local://dns.google/dns-query",
+      "8.8.8.8",
+      "1.1.1.1",
+      "localhost"
+    ]
+  },
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIP"
+      },
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ]
 }
