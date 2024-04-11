@@ -3,7 +3,7 @@
 }
 
 <RELAY-IP> {
-  tls /etc/caddy/server.crt /etc/caddy/server.key
+#  tls /etc/caddy/server.crt /etc/caddy/server.key
 
   reverse_proxy https://baidu.com {
     header_up Host {upstream_hostport}
