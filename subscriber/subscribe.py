@@ -66,20 +66,40 @@ app = FastAPI(
 
 @app.get('/')
 @app.get('/subscribe')
-async def subscribe():
+async def subscribe(apikey: str):
+    if apikey not in app.apikeys:
+        return HTMLResponse(content="0", status_code=400)
+
     links = get_v2ray_links()
     res = '\n'.join(links)
     html = base64.b64encode(res.encode(encoding='utf8'))
     return HTMLResponse(content=html, status_code=200)
 
 @app.get('/subscribe/clash')
-async def subscribe_clash():
+async def subscribe_clash(apikey: str):
+    if apikey not in app.apikeys:
+        return HTMLResponse(content="0", status_code=400)
+
     link = 'http://subscriber:29002/subscribe'
     async with aiohttp.ClientSession() as session:
         url = f'http://subconverter:25500/sub?target=clash&url={link}'
         async with session.get(url) as resp:
             text = await resp.text()
     return HTMLResponse(content=text, status_code=200)
+
+@app.get('/apikey/add/{apikey}')
+async def add_apikey(apikey: str):
+    app.apikeys.add(apikey)
+    return '1'
+
+@app.get('/apikey/remove/{apikey}')
+async def add_apikey(apikey: str):
+    app.apikeys.remove(apikey)
+    return '1'
+
+@app.get('/apikey')
+async def apikey():
+    return ','.join(app.apikeys)
 
 def start():
     uvicorn.run(
@@ -88,6 +108,7 @@ def start():
         port=29002,
         log_level="info",
     )
+    app.apikeys = set(['benny'])
     # scheduler.shutdown()
 
 
