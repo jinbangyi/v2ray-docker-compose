@@ -85,7 +85,7 @@ async def subscribe_clash(apikey: str):
     if apikey not in app.apikeys:
         return HTMLResponse(content="0", status_code=400)
 
-    link = urllib.parse.quote_plus(f'http://subscriber:{DEFAULT_SUBSCRIBER_PORT}/subscribe?apikey={DEFAULT_APIKEY}')
+    link = f'http://subscriber:{DEFAULT_SUBSCRIBER_PORT}/subscribe?apikey={DEFAULT_APIKEY}'
     async with aiohttp.ClientSession() as session:
         url = f'http://subconverter:{DEFAULT_SUBCONVERTER_PORT}/sub'
         params = {
