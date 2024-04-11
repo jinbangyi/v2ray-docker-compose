@@ -22,10 +22,9 @@ IP=`curl ifconfig.me`
 # upstream uuid
 
 sed -i 's/<RELAY-IP>/'$IP'/g' caddy/config/Caddyfile
-cat caddy/config/Caddyfile
 sed -i 's/<RELAY-UUID>/'`cat /proc/sys/kernel/random/uuid`'/g' v2ray/config/config.json
 
-curl -sS https://raw.githubusercontent.com/antelle/generate-ip-cert/master/generate-ip-cert.sh | bash -s $IP
+/bin/bash ../scripts/tls.sh $IP '172.19.10.2'
 mv cert.pem key.pem caddy/config/
 
 cd ../subscriber

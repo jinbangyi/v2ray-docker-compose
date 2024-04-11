@@ -16,7 +16,6 @@
     {
       "tag": "external",
       "port": 10150,
-      "listen": "0.0.0.0",
       "protocol": "vmess",
       "settings": {
         "clients": [
@@ -53,7 +52,6 @@
         ],
         "decryption": "none"
       },
-      "listen": "127.0.0.1",
       "streamSettings": {
         "network": "ws"
       },
