@@ -1,5 +1,6 @@
 # 
 # /bin/bash scripts/upstream.sh
+set -e
 
 cd /tmp
 rm -rf v2ray-docker-compose

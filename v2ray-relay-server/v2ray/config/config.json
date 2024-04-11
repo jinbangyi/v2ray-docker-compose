@@ -41,7 +41,7 @@
     },
     {
       "tag": "interconn",
-      "port": 1310,
+      "port": 11310,
       "protocol": "vmess",
       "streamSettings": {
         "network": "tcp",
@@ -66,11 +66,6 @@
       {
         "type": "field",
         "inboundTag": ["external"],
-        "outboundTag": "portal"
-      },
-      {
-        "type": "field",
-        "inboundTag": ["interconn"],
         "outboundTag": "portal"
       },
       {

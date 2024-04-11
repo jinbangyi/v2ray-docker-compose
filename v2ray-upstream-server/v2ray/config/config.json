@@ -15,7 +15,7 @@
         "vnext": [
           {
             "address": "<RELAY-IP>",
-            "port": 1310,
+            "port": 11310,
             "users": [
               {
                 "id": "<RELAY-UUID>",
