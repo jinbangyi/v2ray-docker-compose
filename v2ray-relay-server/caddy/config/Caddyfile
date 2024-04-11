@@ -3,7 +3,7 @@
 }
 
 <RELAY-IP> {
-  tls /etc/caddy/server.crt /etc/caddy/server.key
+  tls /etc/caddy/cert.pem /etc/caddy/key.pem
 
   reverse_proxy httpbin:80 {
   }

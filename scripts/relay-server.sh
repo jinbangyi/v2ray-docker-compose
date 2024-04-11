@@ -25,6 +25,9 @@ sed -i 's/<RELAY-IP>/'$IP'/g' caddy/config/Caddyfile
 cat caddy/config/Caddyfile
 sed -i 's/<RELAY-UUID>/'`cat /proc/sys/kernel/random/uuid`'/g' v2ray/config/config.json
 
+curl -sS https://raw.githubusercontent.com/antelle/generate-ip-cert/master/generate-ip-cert.sh | bash -s $IP
+mv cert.pem key.pem caddy/config/
+
 cd ../subscriber
 cp -r ../running/v2ray .
 docker build . -t benny-subscriber
