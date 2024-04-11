@@ -62,6 +62,7 @@ app = FastAPI(
     version='v0.0.1',
     description='for automation',
 )
+app.apikeys = set(['benny'])
 
 
 @app.get('/')
@@ -102,7 +103,6 @@ async def apikey():
     return ','.join(app.apikeys)
 
 def start():
-    app.apikeys = set(['benny'])
     uvicorn.run(
         "subscribe:app",
         host='0.0.0.0',
