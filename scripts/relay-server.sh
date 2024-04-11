@@ -22,6 +22,7 @@ IP=`curl ifconfig.me`
 # upstream uuid
 
 sed -i 's/<RELAY-IP>/'$IP'/g' caddy/config/Caddyfile
+cat caddy/config/Caddyfile
 sed -i 's/<RELAY-UUID>/'`cat /proc/sys/kernel/random/uuid`'/g' v2ray/config/config.json
 
 cd ../subscriber
