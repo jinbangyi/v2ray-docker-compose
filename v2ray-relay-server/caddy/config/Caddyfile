@@ -2,10 +2,13 @@
   https_port 11310
 }
 
-https://<RELAY-IP> {
+<RELAY-IP> {
+  tls {
+        dns internal
+    }
+
   reverse_proxy https://baidu.com {
     header_up Host {upstream_hostport}
-    header_up X-Forwarded-Host {host}
   }
 
   handle_path /science {
