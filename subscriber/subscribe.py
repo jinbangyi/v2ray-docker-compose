@@ -102,13 +102,13 @@ async def apikey():
     return ','.join(app.apikeys)
 
 def start():
+    app.apikeys = set(['benny'])
     uvicorn.run(
         "subscribe:app",
         host='0.0.0.0',
         port=29002,
         log_level="info",
     )
-    app.apikeys = set(['benny'])
     # scheduler.shutdown()
 
 
