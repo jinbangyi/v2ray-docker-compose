@@ -24,4 +24,5 @@ cp -r ../running/v2ray .
 docker build . -t benny-subscriber
 
 cd ../running/
+docker-compose down
 docker-compose up -d

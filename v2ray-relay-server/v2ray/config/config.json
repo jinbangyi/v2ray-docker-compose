@@ -9,18 +9,6 @@
   },
   "inbounds": [
     {
-      "tag": "external",
-      "port": 9101,
-      "settings": {
-        "clients": [
-          {
-            "id": "<RELAY-UUID>",
-            "alterId": 64
-          }
-        ]
-      }
-    },
-    {
       "tag": "interconn",
       "port": 16823,
       "protocol": "vmess",
