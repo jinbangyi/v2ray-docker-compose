@@ -13,7 +13,7 @@ services:
       - ./logs:/var/log/v2ray/
     networks:
       vpcbr:
-        ipv4_address: 172.19.10.1
+        ipv4_address: 172.19.10.6
 
   caddy: 
     image: caddy

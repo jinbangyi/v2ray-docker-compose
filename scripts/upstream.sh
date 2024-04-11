@@ -13,6 +13,7 @@ cp -r v2ray-upstream-server/* running/
 # cp -r utils running/
 
 cd running/
+mkdir logs
 # IP=`curl ifconfig.me`
 
 # /bin/bash ./utils/bbr.sh

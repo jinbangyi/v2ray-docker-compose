@@ -11,7 +11,6 @@ mkdir running
 cp -r v2ray-relay-server/* running/
 # cp -r utils running/
 cd running/
-
 mkdir logs
 # /bin/bash ./utils/bbr.sh
 IP=`curl ifconfig.me`

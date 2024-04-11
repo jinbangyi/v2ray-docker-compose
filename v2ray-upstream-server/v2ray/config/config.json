@@ -1,9 +1,14 @@
 {
+  "log": {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
+    "loglevel": "debug"
+  },
   "reverse": {
     "bridges": [
       {
         "tag": "bridge",
-        "domain": "private.cloud.com"
+        "domain": "autoscript.cc"
       }
     ]
   },
@@ -59,7 +64,7 @@
       {
         "type": "field",
         "inboundTag": ["bridge"],
-        "domain": ["full:private.cloud.com"],
+        "domain": ["full:autoscript.cc"],
         "outboundTag": "tunnel"
       },
       {
