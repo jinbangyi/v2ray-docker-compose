@@ -2,8 +2,9 @@ import base64
 import os
 import subprocess
 import json
-import requests
+import urllib.parse
 
+import requests
 import uvicorn
 import aiohttp
 from fastapi import FastAPI
@@ -84,7 +85,7 @@ async def subscribe_clash(apikey: str):
     if apikey not in app.apikeys:
         return HTMLResponse(content="0", status_code=400)
 
-    link = f'http://subscriber:{DEFAULT_SUBSCRIBER_PORT}/subscribe?apikey={DEFAULT_APIKEY}'
+    link = urllib.parse.quote_plus(f'http://subscriber:{DEFAULT_SUBSCRIBER_PORT}/subscribe?apikey={DEFAULT_APIKEY}')
     async with aiohttp.ClientSession() as session:
         url = f'http://subconverter:{DEFAULT_SUBCONVERTER_PORT}/sub?target=clash&url={link}'
         async with session.get(url) as resp:
