@@ -76,7 +76,7 @@ async def subscribe():
 async def subscribe_clash():
     link = 'http://subscriber:29002/subscribe'
     async with aiohttp.ClientSession() as session:
-        url = f'http://127.0.0.1:25500/sub?target=clash&url={link}'
+        url = f'http://subconverter:25500/sub?target=clash&url={link}'
         async with session.get(url) as resp:
             text = await resp.text()
     return HTMLResponse(content=text, status_code=200)
