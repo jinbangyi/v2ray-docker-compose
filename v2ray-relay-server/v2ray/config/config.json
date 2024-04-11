@@ -70,6 +70,11 @@
       },
       {
         "type": "field",
+        "inboundTag": ["interconn"],
+        "outboundTag": "portal"
+      },
+      {
+        "type": "field",
         "inboundTag": ["tunnel"],
         "domain": ["full:autoscript.cc"],
         "outboundTag": "portal"
@@ -84,12 +89,7 @@
     }
   },
   "dns": {
-    "servers": [
-      "223.5.5.5",
-      "8.8.8.8",
-      "1.1.1.1",
-      "localhost"
-    ]
+    "servers": ["223.5.5.5", "8.8.8.8", "1.1.1.1", "localhost"]
   },
   "outbounds": [
     {

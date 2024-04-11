@@ -19,9 +19,11 @@ IP=`curl ifconfig.me`
 # # upstream ip
 # sed -i 's/<UPSTREAM-IP>/'$1'/g' v2ray/config/config.json
 # upstream uuid
+UUID=`cat /proc/sys/kernel/random/uuid`
+echo UUID: $UUID
 
 sed -i 's/<RELAY-IP>/'$IP'/g' caddy/config/Caddyfile
-sed -i 's/<RELAY-UUID>/'`cat /proc/sys/kernel/random/uuid`'/g' v2ray/config/config.json
+sed -i 's/<RELAY-UUID>/'$UUID'/g' v2ray/config/config.json
 
 /bin/bash ../scripts/tls.sh $IP '172.19.10.2'
 mv cert.pem key.pem caddy/config/

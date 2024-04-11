@@ -136,6 +136,30 @@ Moved here: [HTTP_SOCKS](docs/HTTP_SOCKS.md)
 
 ## Custom
 
-arch
-
 ![alt text](https://guide.v2fly.org/assets/img/block_of_reverse-vmess.cd11ba0c.png)
+
+国外服务器 <-> 国内服务器 <-> [本地 v2ray | 本地 clash]
+
+原理说明:
+
+使用国内服务器桥接国外服务器与本地客户端。
+
+说明:
+
+- 10150 端口用于国内代理
+- 29002 端口用于订阅
+- 11310 端口用于国外服务器访问国内服务器
+- 运行步骤中的 <uid> 为运行 `./scripts/relay-server.sh` 时输出的结果 `UUID: xx`
+- 运行步骤中的 <ip> 为国内服务器的公网 IP
+
+前置条件:
+
+- 国内服务器需要有公网
+- 国内服务器与国外服务器需要提前安装好 docker
+- 国内机器需要开放 10150、29002、11310 三个端口
+
+运行步骤:
+
+1. 在国内服务器运行 `./scripts/relay-server.sh`
+2. 在国外服务器运行 `./scripts/upstream.sh <uid> <ip>`
+3. v2ray 客户端订阅链接 `http://<国内IP>:29002/subscribe`. clash 客户端订阅链接 `http://<国内IP>:29002/subscribe/clash`
