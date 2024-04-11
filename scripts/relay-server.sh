@@ -11,13 +11,13 @@ cd running/
 
 mkdir logs
 # /bin/bash ./utils/bbr.sh
-IP=`curl ifconfig.me`
-sed -i 's/<BRIDGE-UUID>/'`cat /proc/sys/kernel/random/uuid`'/g' v2ray/config/config.json
-sed -i 's/<RELAY-IP>/'$IP'/g' caddy/config/Caddyfile
-# upstream ip
-sed -i 's/<UPSTREAM-IP>/'$1'/g' v2ray/config/config.json
+# IP=`curl ifconfig.me`
+# sed -i 's/<BRIDGE-UUID>/'`cat /proc/sys/kernel/random/uuid`'/g' v2ray/config/config.json
+# sed -i 's/<RELAY-IP>/'$IP'/g' caddy/config/Caddyfile
+# # upstream ip
+# sed -i 's/<UPSTREAM-IP>/'$1'/g' v2ray/config/config.json
 # upstream uuid
-sed -i 's/<UPSTREAM-UUID>/'$2'/g' v2ray/config/config.json
+sed -i 's/<RELAY-UUID>/'`cat /proc/sys/kernel/random/uuid`'/g' v2ray/config/config.json
 
 cd ../subscriber
 cp -r ../running/v2ray .

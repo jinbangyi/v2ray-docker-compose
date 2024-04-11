@@ -19,7 +19,6 @@ def get_vmess_links():
         "v": 2,
         "ps": f"nftgo-tcp-{ip}",
         "add": ip,
-        "aid": "0",
         "type": "none",
         "path": "",
         "net": "tcp"
@@ -30,8 +29,9 @@ def get_vmess_links():
         if len(vmess_config) > 0:
             vmess['port'] = vmess_config[0]['port']
             vmess['id'] = vmess_config[0]['settings']['clients'][0]['id']
+            vmess['aid'] = vmess_config[0]['settings']['clients'][0]['alterId']
 
-    return base64.b64encode(json.dumps(vmess).encode('utf8')).decode()
+    return base64.b64encode(json.dumps(vmess).encode('ascii')).decode('ascii')
 
 def get_v2ray_links() -> list:
     link = get_vmess_links()
