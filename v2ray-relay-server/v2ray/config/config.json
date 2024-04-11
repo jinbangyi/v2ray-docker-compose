@@ -22,7 +22,7 @@
         "clients": [
           {
             "id": "<RELAY-UUID>",
-            "alterId": 64
+            "alterId": 0
           }
         ]
       },
