@@ -1,8 +1,10 @@
 set -e
 
-cd /tmp
-rm -rf v2ray-docker-compose
+rm -rf ~/temp
+mkdir ~/temp
+cd ~/temp
 
+rm -rf v2ray-docker-compose
 # git clone https://github.com/jinbangyi/v2ray-docker-compose.git
 git clone https://gitee.com/jinbangy/v2ray-docker-compose.git
 cd v2ray-docker-compose
