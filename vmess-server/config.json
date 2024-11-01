@@ -1,0 +1,67 @@
+{
+  "log": {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
+    "loglevel": "debug"
+  },
+  "inbounds": [
+    {
+      "tag": "external",
+      "port": 10150,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "<RELAY-UUID>",
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "tcpSettings": {
+          "header": {
+            "type": "none"
+          }
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": ["external"],
+        "outboundTag": "direct"
+      }
+    ]
+  },
+  "transport": {
+    "kcpSettings": {
+      "uplinkCapacity": 100,
+      "downlinkCapacity": 100,
+      "congestion": true
+    }
+  },
+  "dns": {
+    "servers": ["223.5.5.5", "8.8.8.8", "1.1.1.1", "localhost"]
+  },
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIP"
+      },
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  v2ray:
+    image: ghcr.io/v2fly/v2ray:v5.14.1-64-std
+    restart: always
+    environment:
+      - v2ray.vmess.aead.forced=false
+    ports:
+      - "10150:10150"
+    volumes:
+      - ./v2ray/config/:/etc/v2ray/
+      - ./logs:/var/log/v2ray/
+    # networks:
+    #   vpcbr:
+    #     ipv4_address: 172.19.10.6
+
+  # TODO add Domain spoofing
+  # caddy: 
+  #   image: caddy
+  #   restart: always
+  #   ports:
+  #     - "11310:11310"
+  #   volumes:
+  #     - ./caddy/config/:/etc/caddy/
+  #   networks:
+  #     vpcbr:
+  #       ipv4_address: 172.19.10.2
+
+# networks:
+#   vpcbr:
+#     driver: bridge
+#     ipam:
+#      config:
+#        - subnet: 172.19.10.0/24
+#          gateway: 172.19.10.1
