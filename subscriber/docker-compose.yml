@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  subconverter:
+    image: tindy2013/subconverter:0.9.0
+    restart: always
+
+  subscriber:
+    image: benny-subscriber
+    restart: always
+    ports:
+      - "29002:29002"

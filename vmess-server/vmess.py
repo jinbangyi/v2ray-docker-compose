@@ -11,6 +11,7 @@ class Link(BaseModel):
     port: int
     aid: int = 0
     type: str = "vmess"
+    ip: str = ""
 
 
 def get_vmess_server_config(uuid: str, port: int = 10150) -> dict:
@@ -63,11 +64,11 @@ def get_vmess_server_config(uuid: str, port: int = 10150) -> dict:
 
 
 @click.command()
-@click.option('--domain', help='remote domain')
-@click.option('--remote_port', default=29002, help='remote port')
+@click.option("--domain", help="remote domain")
+@click.option("--remote_port", default=29002, help="remote port")
 def start(domain: str, remote_port: int):
-    uuid_path = '/proc/sys/kernel/random/uuid'
-    config_path = Path.cwd().joinpath('config.json')
+    uuid_path = "/proc/sys/kernel/random/uuid"
+    config_path = Path.cwd().joinpath("config.json")
     with open(uuid_path) as f:
         uuid = f.read()
 
@@ -77,8 +78,13 @@ def start(domain: str, remote_port: int):
         json.dump(vmess_server_config, f)
 
     remote_domain = domain
-    
-    resp = requests.post(f"http://{remote_domain}:{remote_port}/links", json=Link(id=uuid, port=port).json())
+    resp = requests.get("http://ifconfig.me")
+    ip = resp.text
+
+    resp = requests.post(
+        f"http://{remote_domain}:{remote_port}/links",
+        data=Link(id=uuid, port=port, ip=ip).json(),
+    )
     if resp.status_code != 200:
         raise Exception("Failed to upload link")
 

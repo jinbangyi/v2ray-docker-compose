@@ -15,11 +15,15 @@ class Link(BaseModel):
     port: int
     aid: int = 0
     type: str = "vmess"
+    ip: str = ""
 
 
 def get_vmess_subscribe_link(link: Link) -> str:
-    resp = requests.get("http://ifconfig.me")
-    ip = resp.text
+    if link.ip:
+        ip = link.ip
+    else: 
+        resp = requests.get("http://ifconfig.me")
+        ip = resp.text
     vmess = {
         "v": 2,
         "ps": f"nftgo-tcp-{ip}",
